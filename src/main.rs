@@ -1,10 +1,10 @@
-mod surface;
+mod game;
 
-use crate::surface::Surface;
+use crate::game::Game;
 
 fn main() {
-    let surface = Surface::create("Nescht Demo", 1280, 720);
-    surface.start(update, shutdown);
+    Game::create("Nescht Demo", 1280, 720)
+        .start(update, shutdown);
 }
 
 fn update() {

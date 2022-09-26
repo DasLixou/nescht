@@ -2,12 +2,12 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 use winit::{window::{Window, WindowBuilder}, event_loop::{EventLoop, ControlFlow}, dpi::LogicalSize, event::{Event, WindowEvent}};
 
-pub struct Surface {
+pub struct Game {
     window: Window,
     event_loop: EventLoop<()>,
 }
 
-impl Surface {
+impl Game {
     pub fn create(title: &str, width: i32, height: i32) -> Self {
         let event_loop = EventLoop::new();
         let window = WindowBuilder::new()
