@@ -1,3 +1,5 @@
 pub mod game;
 
-pub use game::Game;
+pub mod prelude {
+    pub use crate::game::Game;
+}

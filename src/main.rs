@@ -1,4 +1,4 @@
-use nescht::Game;
+use nescht::prelude::*;
 
 fn main() {
     Game::create("Nescht Demo", 1280, 720)
