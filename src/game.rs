@@ -33,11 +33,12 @@ impl Game {
                     },
                     _ => { }
                 },
-                _ => {
+                Event::MainEventsCleared => {
                     if logic_should_run.load(Ordering::Relaxed) {
                         update_logic();
                     }
                 },
+                _ => { },
             }
         });
     }
