@@ -1,6 +1,4 @@
-mod game;
-
-use crate::game::Game;
+use nescht::Game;
 
 fn main() {
     Game::create("Nescht Demo", 1280, 720)
