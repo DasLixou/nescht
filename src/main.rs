@@ -7,8 +7,16 @@ fn main() {
     }
 
     let scheduler = Scheduler::new(20, update, 60, render, shutdown);
+    let game = Game::create(scheduler, "Nescht Demo", 1280, 720);
 
-    Game::create(scheduler, "Nescht Demo", 1280, 720).start();
+    #[cfg(not(target_os = "linux"))]
+    {
+        nescht::window::start(game);
+    }
+    #[cfg(target_os = "linux")]
+    {
+        nescht::window::start(game);
+    }
 }
 
 fn update() {
