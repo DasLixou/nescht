@@ -1,5 +1,3 @@
-use std::sync::atomic::{AtomicBool, Ordering};
-
 use winit::{
     dpi::LogicalSize,
     event::{Event, WindowEvent},
@@ -32,7 +30,7 @@ impl Game {
     }
 
     pub fn start(mut self) {
-        let logic_should_run = AtomicBool::new(true);
+        let mut logic_should_run = true;
 
         self.event_loop.run(move |event, _, control_flow| {
             *control_flow = ControlFlow::Poll;
@@ -40,15 +38,20 @@ impl Game {
             match event {
                 Event::WindowEvent { event, window_id } => match event {
                     WindowEvent::CloseRequested if window_id == self.window.id() => {
-                        logic_should_run.store(false, Ordering::Relaxed);
+                        logic_should_run = false;
                         self.scheduler.shutdown();
                         *control_flow = ControlFlow::Exit;
                     }
                     _ => {}
                 },
                 Event::MainEventsCleared => {
-                    if logic_should_run.load(Ordering::Relaxed) {
+                    if logic_should_run {
                         self.scheduler.update()
+                    }
+                }
+                Event::RedrawRequested(_) => {
+                    if logic_should_run {
+                        self.scheduler.render()
                     }
                 }
                 _ => {}

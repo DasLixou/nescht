@@ -15,7 +15,9 @@ fn update() {
     println!("UPDATE");
 }
 
-fn render() {}
+fn render() {
+    println!("RENDER");
+}
 
 fn shutdown() {
     println!("peepoBye");
