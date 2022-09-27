@@ -6,13 +6,16 @@ fn main() {
         println!("{:?}", adapter.get_info());
     }
 
-    Game::create("Nescht Demo", 1280, 720)
-        .start(update, shutdown);
+    let scheduler = Scheduler::new(20, update, 60, render, shutdown);
+
+    Game::create(scheduler, "Nescht Demo", 1280, 720).start();
 }
 
 fn update() {
     println!("UPDATE");
 }
+
+fn render() {}
 
 fn shutdown() {
     println!("peepoBye");
